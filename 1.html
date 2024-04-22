@@ -1,0 +1,102 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>滑动折叠日历</title>  
+</head>  
+<style>
+  /* styles.css */  
+.calendar {  
+  width: 300px;  
+  overflow-x: auto;  
+  position: relative;  
+  transition: height 0.3s ease;  
+}  
+  
+.calendar-body {  
+  display: flex;  
+  flex-direction: column;  
+}  
+  
+.calendar-days {  
+  display: flex;  
+  flex-wrap: wrap;  
+  transition: transform 0.3s ease;  
+}  
+  
+.calendar.collapsed .calendar-days {  
+  transform: translateY(-100%);  
+}  
+  
+/* 其他必要的样式 */
+</style>
+<body>  
+  
+<div id="calendar" class="calendar">  
+  <div class="calendar-header">  
+    <!-- 日历标题或月份显示 -->  
+  </div>  
+  <div class="calendar-body">  
+    <div class="calendar-week">  
+      <!-- 周一到周日的表头 -->  
+    </div>  
+    <div class="calendar-days">  
+      <!-- 日历的具体日期 -->  
+    </div>  
+  </div>  
+</div>  
+  
+<script>
+  // script.js  
+document.addEventListener('DOMContentLoaded', function() {  
+  const calendar = document.getElementById('calendar');  
+  let isCollapsed = false;  
+  let startY = 0;  
+  let touchStart = false;  
+  
+  function toggleCollapse() {  
+    if (isCollapsed) {  
+      calendar.classList.remove('collapsed');  
+      isCollapsed = false;  
+    } else {  
+      calendar.classList.add('collapsed');  
+      isCollapsed = true;  
+    }  
+  }  
+  
+  calendar.addEventListener('touchstart', function(e) {  
+    startY = e.touches[0].pageY;  
+    touchStart = true;  
+  });  
+  
+  calendar.addEventListener('touchmove', function(e) {  
+    if (touchStart) {  
+      e.preventDefault(); // 阻止页面滚动  
+    }  
+  });  
+  
+  calendar.addEventListener('touchend', function(e) {  
+    if (touchStart) {  
+      const endY = e.changedTouches[0].pageY;  
+      const deltaY = endY - startY;  
+      if (Math.abs(deltaY) > 50) { // 设置阈值  
+        if (deltaY > 0) {  
+          // 上划，折叠日历  
+          toggleCollapse();  
+        }  
+      }  
+      touchStart = false;  
+    }  
+  });  
+  
+  // 假设有一个函数用于生成日历内容  
+  function generateCalendarContent() {  
+    // 填充日历内容到DOM中  
+  }  
+  
+  generateCalendarContent(); // 初始生成日历内容  
+});
+</script>  
+</body>  
+</html>
