@@ -1,102 +1,358 @@
-<!DOCTYPE html>  
-<html lang="en">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-<title>滑动折叠日历</title>  
-</head>  
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="http://106.52.51.214/app/jcxx100t/jpg/tubiao.ico" />
+    <link rel="stylesheet" href="http://106.52.51.214/app/jcxx100t/icomoon/style.css">
+    <meta name="description" content="打卡签到软件" />
+    <meta name="keywords" content="打卡、App、坚持学习" />
+    <script src="http://106.52.51.214/app/jcxx100t/jjkmeihua/sweetalert.min.js"></script>
+    <title>坚持学习100天</title>
+</head>
 <style>
-  /* styles.css */  
-.calendar {  
-  width: 300px;  
-  overflow-x: auto;  
-  position: relative;  
-  transition: height 0.3s ease;  
-}  
-  
-.calendar-body {  
-  display: flex;  
-  flex-direction: column;  
-}  
-  
-.calendar-days {  
-  display: flex;  
-  flex-wrap: wrap;  
-  transition: transform 0.3s ease;  
-}  
-  
-.calendar.collapsed .calendar-days {  
-  transform: translateY(-100%);  
-}  
-  
-/* 其他必要的样式 */
+    * {
+        margin: 0 auto;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 楷体;
+        -webkit-touch-callout: none;
+        禁止复制文字 -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        去除点击高亮 -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-tap-highlight-color: transparent;
+    }
 </style>
-<body>  
-  
-<div id="calendar" class="calendar">  
-  <div class="calendar-header">  
-    <!-- 日历标题或月份显示 -->  
-  </div>  
-  <div class="calendar-body">  
-    <div class="calendar-week">  
-      <!-- 周一到周日的表头 -->  
-    </div>  
-    <div class="calendar-days">  
-      <!-- 日历的具体日期 -->  
-    </div>  
-  </div>  
-</div>  
-  
-<script>
-  // script.js  
-document.addEventListener('DOMContentLoaded', function() {  
-  const calendar = document.getElementById('calendar');  
-  let isCollapsed = false;  
-  let startY = 0;  
-  let touchStart = false;  
-  
-  function toggleCollapse() {  
-    if (isCollapsed) {  
-      calendar.classList.remove('collapsed');  
-      isCollapsed = false;  
-    } else {  
-      calendar.classList.add('collapsed');  
-      isCollapsed = true;  
-    }  
-  }  
-  
-  calendar.addEventListener('touchstart', function(e) {  
-    startY = e.touches[0].pageY;  
-    touchStart = true;  
-  });  
-  
-  calendar.addEventListener('touchmove', function(e) {  
-    if (touchStart) {  
-      e.preventDefault(); // 阻止页面滚动  
-    }  
-  });  
-  
-  calendar.addEventListener('touchend', function(e) {  
-    if (touchStart) {  
-      const endY = e.changedTouches[0].pageY;  
-      const deltaY = endY - startY;  
-      if (Math.abs(deltaY) > 50) { // 设置阈值  
-        if (deltaY > 0) {  
-          // 上划，折叠日历  
-          toggleCollapse();  
-        }  
-      }  
-      touchStart = false;  
-    }  
-  });  
-  
-  // 假设有一个函数用于生成日历内容  
-  function generateCalendarContent() {  
-    // 填充日历内容到DOM中  
-  }  
-  
-  generateCalendarContent(); // 初始生成日历内容  
-});
-</script>  
-</body>  
+
+<body style="background-color:#3e3e3e;min-height: 320px;overflow:auto;">
+    <div style="position:fixed;top: 0;left: 0;width: 100%;height: 60px;background-color: #2e2e2e;line-height: 60px;color: #fff;
+    font-size: 23px;padding-left: 10px;padding-right: 10px;">每日计划<span style="float: right;"
+    onclick="location.href='http://106.52.51.214/app/jcxx100t/%E6%AF%8F%E6%97%A5%E8%AE%A1%E5%88%92/index.html'">社区网页版</span></div>
+    <div style="margin-top: 150px;">
+        <img src="http://106.52.51.214/app/jcxx100t/jpg/tubiao.ico" style="display: block;width:130px;height: 125px;">
+        <h3 style="text-align: center;color: #fff;font-size: 22px;margin-top: 10px;">每日计划</h3>
+        <p style="width:100%;text-align:center;color:#fff;font-size:12px" onclick="gxrz()">
+            （上次更新时间：2024年4月11日）<br>点击查看更新日志</p>
+    </div>
+    <div style="margin-top:50px;">
+        <h2 style="text-align:center;color: #fff;width: 85%;border-radius: 30px;background-color: #2e2e2e;height: 50px;
+        line-height: 50px;cursor: pointer;font-family: 'icomoon';font-size: 22px;" onclick="az_xz()">
+            &nbsp;&nbsp;Android</h2>
+        <h2 style="text-align:center;color: #fff;width: 85%;border-radius: 30px;background-color: #2e2e2e;height: 50px;
+        line-height: 50px;margin-top: 20px;cursor: pointer;
+        font-family: 'icomoon';font-size: 22px;margin-bottom:50px;" onclick="ios_xz()">&nbsp;&nbsp;ios</h2>
+    </div>
+
+    <script>
+        function detectLet() {
+            var arrowFunction = "var t = () => {};";
+            try {
+                f = new Function(arrowFunction);
+                return true
+            } catch (e) {
+                return false
+            }
+        }
+
+        function az_xz() {
+            if (detectLet()) {
+                swal({
+                    title: "请选择下载版本",
+                    text: "普通用户请下载普通版，兼容版为测试使用的旧版安装包，精简版去除了社区，登录，评论反馈等网络功能。\n注：软件仅支持Android 4.4及以上运行。",
+                    dangerMode: true,
+                    closeOnClickOutside: false,
+                    buttons: {
+                        cancel: "返回",
+                        defeat: "普通版",
+                        confirm: {
+                            text: "兼容版",
+                            value: "confirm"
+                        },
+                        confirmb: {
+                            text: "更多历史版本",
+                            value: "confirmb"
+                        },
+                        confirmc: {
+                            text: "精简版",
+                            value: "confirmc"
+                        }
+                    }
+                }).then((value) => {
+                    switch (value) {
+                        case "defeat":
+                            setTimeout(function () {
+                                window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.238.apk'
+                            }, 150);
+                            break;
+                        case "confirm":
+                            setTimeout(function () {
+                                window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.200_.apk'
+                            }, 150);
+                            break;
+                        case "confirmc":
+                            setTimeout(function () {
+                                window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.apk'
+                            }, 150);
+                            break;
+                        case "confirmb":
+                            swal({
+                                title: "请选择下载版本",
+                                text: "",
+                                closeOnClickOutside: false,
+                                buttons: {
+                                    cancel: "返回",
+                                    defeat: "1.0.110",
+                                    confirm: {
+                                        text: "1.0.118",
+                                        value: "confirm"
+                                    },
+                                    confirmb: {
+                                        text: "1.0.119",
+                                        value: "confirmb"
+                                    },
+                                    confirmc: {
+                                        text: "1.0.200",
+                                        value: "confirmc"
+                                    },
+                                    confirmd: {
+                                        text: "1.0.201",
+                                        value: "confirmd"
+                                    },
+                                    confirme: {
+                                        text: "1.0.202",
+                                        value: "confirme"
+                                    },
+                                    confirmf: {
+                                        text: "1.0.203",
+                                        value: "confirmf"
+                                    },
+                                    confirmg: {
+                                        text: "1.0.204",
+                                        value: "confirmg"
+                                    },
+                                    confirmh: {
+                                        text: "1.0.205",
+                                        value: "confirmh"
+                                    },
+                                    confirml: {
+                                        text: "1.0.207",
+                                        value: "confirml"
+                                    },
+                                    confirmn: {
+                                        text: "1.0.208",
+                                        value: "confirmn"
+                                    },
+                                    confirmm: {
+                                        text: "1.0.209",
+                                        value: "confirmm"
+                                    },
+                                    confirmo: {
+                                        text: "1.0.210",
+                                        value: "confirmo"
+                                    },
+                                    confirmp: {
+                                        text: "1.0.212",
+                                        value: "confirmp"
+                                    },
+                                    confirmq: {
+                                        text: "1.0.213",
+                                        value: "confirmq"
+                                    },
+                                    confirmr: {
+                                        text: "1.0.214",
+                                        value: "confirmr"
+                                    },
+                                    confirms: {
+                                        text: "1.0.215",
+                                        value: "confirms"
+                                    },
+                                    confirmw: {
+                                        text: "1.0.216",
+                                        value: "confirmw"
+                                    },
+                                    confirmw_1: {
+                                        text: "1.0.219",
+                                        value: "confirmw_1"
+                                    },
+                                    confirmw_2: {
+                                        text: "1.0.220",
+                                        value: "confirmw_2"
+                                    },
+                                    confirmw_3: {
+                                        text: "1.0.224",
+                                        value: "confirmw_3"
+                                    },
+                                    confirmw_4: {
+                                        text: "1.0.226",
+                                        value: "confirmw_4"
+                                    },
+                                    confirmw_5: {
+                                        text: "1.0.228",
+                                        value: "confirmw_5"
+                                    },
+                                    confirmw_6: {
+                                        text: "1.0.230",
+                                        value: "confirmw_6"
+                                    },
+                                    confirmw_7: {
+                                        text: "1.0.234",
+                                        value: "confirmw_7"
+                                    }
+                                }
+                            }).then((value) => {
+                                switch (value) {
+                                    case "defeat":
+                                        setTimeout(function () {
+                                            window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.110.apk'
+                                        }, 150);
+                                        break;
+                                    case "confirm":
+                                        setTimeout(function () {
+                                            window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.118.apk'
+                                        }, 150);
+                                        break;
+                                    case "confirmb":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.119.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirmc":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.200.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirmd":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.201.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirme":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.202.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirmf":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.203.apk'
+                                          }, 150);
+                                        break;
+                                     case "confirmg":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.204.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirmh":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.205.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirml":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.207.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirmn":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.208.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirmm":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.209.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirmo":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.210.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirmp":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.212.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirmq":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.213.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirmr":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.214.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirms":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.215.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirmw":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.216.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirmw_1":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.219.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirmw_2":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.220.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirmw_3":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.224.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirmw_4":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.226.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirmw_5":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.228.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirmw_6":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.230.apk'
+                                          }, 150);
+                                        break;
+                                    case "confirmw_7":
+                                            setTimeout(function() {
+                                              window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.234.apk'
+                                          }, 150);
+                                        break;
+                                    default:
+                                }
+                            });
+                            break;
+                        default:
+                    }
+                });
+            } else {
+                window.location.href = 'http://106.52.51.214/app/jcxx100t/1.0.200_.apk'
+            }
+        }
+        function ios_xz() {
+            if (detectLet()) {
+                swal('暂不支持ios端', '')
+            } else {
+                alert('暂不支持ios端')
+            }
+        }
+        function gxrz() {
+            alert('更新日志\n\n1.0.235~1.0.238：新增代办功能，优化部分内容，修复了部分已知的BUG。（2024-4/3）\n\n1.0.231~1.0.234：更换了启动图，优化部分内容，修复了部分已知的BUG。（2024-3/28）\n\n1.0.229~1.0.230：新增硬币商城功能，优化部分内容，修复了部分已知的BUG。（2024-2/3）\n\n1.0.227~1.0.228：优化了页面滚动手感，社区和AI大语言模型新增识别链接，修复了部分已知BUG。（2024-1/10）\n\n1.0.225~1.0.226：新增AI大语言模型，接口为百度AI《文心一言》(已更换为免费模型Yi-34B-Chat/2023-12/31)。\n\n1.0.221~1.0.224：开放了社区，优化了部分功能，低于此版本将无法正常使用评论反馈功能。（2023-12/20）\n\n1.0.220：优化了部分功能，修改了部分服务器链接地址，低于此版本将无法使用评论反馈和个性装扮功能。（2023-12/15）\n\n1.0.217~1.0.219：修改了部分页面UI，优化了部分功能。（2023-12/12）\n\n1.0.216：新增了了桌面壁纸功能，优化了部分功能。（2023-11/24）\n\n1.0.215：优化了部分操作动画和功能。（2023-11/16）\n\n1.0.214：修复了日常规划任务改名打卡次数不继承，打卡详情可重复补签的问题，优化了数据上传功能，可同步更多数据，新增思维导图功能，修复了部分已知BUG。（2023-11/6）\n\n1.0.213：新增本地迁移数据功能，优化了部分功能。（2023-10/26）\n\n1.0.211~1.0.212：新增学习时长统计页面，优化了部分功能。（2023-10/16）\n\n1.0.210：修复了评论区只能回复不能直接评论的BUG，优化了部分功能。（2023-10/5）\n\n1.0.209：优化了头像上传功能。（2023-10/1）\n\n1.0.208：优化了课程表，今日任务，问题反馈页面。（2023-9/29）\n\n1.0.206~1.0.207：优化了页面深色模式显示效果。（2023-9/27）\n\n1.0.205：优化了课程表，反馈页面部分功能。（2023-9/25）\n\n1.0.204：开放了反馈页面，可在应用中直接评论反馈问题。（2023-9/15）\n\n11.0.203：修复了已知BUG，增加了主题（装扮）功能。（2023-9/8）\n\n1.0.202：优化了部分页面切换逻辑。\n\n1.0.201：优化了应用图标和软件启动图。\n\n1.0.200：优化了部分页面UI。\n\n1.0.119：优化了部分数据存储方式，开放了注册登录功能，将支持多设备数据共享。\n\n1.0.116~1.0.118：优化了若干页面内容和操作手势，修复了部分已知BUG。')
+        }
+    </script>
+</body>
+
 </html>
