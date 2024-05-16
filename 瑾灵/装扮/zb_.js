@@ -16,7 +16,26 @@ function plusReady_zb() {
 	dibu_ys_i_h3 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3196.PNG')
 	dibu_ys_i_h4 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3188.PNG')
 
-	localforage.getItem('ZB_img', function(err, value) {
+	let img = document.createElement('img'); // 更名为 img 而不是 iframe  
+	img.src = dibu_ys_i_q0; // 假设 bz 是一个已经定义的变量，包含了图像的 URL 
+	img.addEventListener('error', () => {
+		plus.nativeUI.toast('下载装扮成功，开始解压');
+		localforage.setItem('ZB_img', false).then(function (value) { }).catch(
+			function (err) { });
+		plus.zip.decompress(plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH.zip'),
+			'_doc/ZB/IMG/',
+			function () {
+				plus.nativeUI.toast('解压完成，正在载入装扮');
+				plusReady_zb()
+			},
+			function (error) {
+				plus.nativeUI.toast('解压失败');
+				localforage.removeItem('ZB').then(function () {
+				}).catch(function (err) { });
+			});
+	})
+
+	localforage.getItem('ZB_img', function (err, value) {
 		ZB_img = true
 		if (value != null) {
 			ZB_img = value
@@ -31,16 +50,18 @@ function plusReady_zb() {
 				if (sessionStorage.getItem('zb_zip')) {
 					clearInterval(zbb)
 					plus.nativeUI.toast('下载装扮成功，开始解压');
-					localforage.setItem('ZB_img', false).then(function(value) {}).catch(
-						function(err) {});
+					localforage.setItem('ZB_img', false).then(function (value) { }).catch(
+						function (err) { });
 					plus.zip.decompress(plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH.zip'),
 						'_doc/ZB/IMG/',
-						function() {
+						function () {
 							plus.nativeUI.toast('解压完成，正在载入装扮');
 							plusReady_zb()
 						},
-						function(error) {
+						function (error) {
 							plus.nativeUI.toast('解压失败');
+							localforage.removeItem('ZB').then(function () {
+							}).catch(function (err) { });
 						});
 				} else if (ysbxz > 60) {
 					clearInterval(zbb)
