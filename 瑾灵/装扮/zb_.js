@@ -29,9 +29,7 @@ function plusReady_zb() {
 				plusReady_zb()
 			},
 			function (error) {
-				plus.nativeUI.toast('解压失败');
-				localforage.removeItem('ZB').then(function () {
-				}).catch(function (err) { });
+				// plus.nativeUI.toast('解压失败');
 			});
 	})
 
