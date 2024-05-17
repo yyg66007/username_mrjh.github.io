@@ -8,12 +8,12 @@ function plusReady_zb() {
 	dibu_ys_i_q0 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3202.PNG')
 	dibu_ys_i_q1 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3198.PNG')
 	dibu_ys_i_q2 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3194.PNG')
-	dibu_ys_i_q3 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3198.PNG')
+	dibu_ys_i_q3 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3196.PNG')
 	dibu_ys_i_q4 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3190.PNG')
 	dibu_ys_i_h0 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3200.PNG')
 	dibu_ys_i_h1 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3196.PNG')
 	dibu_ys_i_h2 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3192.PNG')
-	dibu_ys_i_h3 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3196.PNG')
+	dibu_ys_i_h3 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3198.PNG')
 	dibu_ys_i_h4 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3188.PNG')
 
 	let img = document.createElement('img'); // 更名为 img 而不是 iframe  
