@@ -19,7 +19,6 @@ function plusReady_zb() {
 	let img = document.createElement('img'); // 更名为 img 而不是 iframe  
 	img.src = dibu_ys_i_q0; // 假设 bz 是一个已经定义的变量，包含了图像的 URL 
 	img.addEventListener('error', () => {
-		plus.nativeUI.toast('下载装扮成功，开始解压');
 		localforage.setItem('ZB_img', false).then(function (value) { }).catch(
 			function (err) { });
 		plus.zip.decompress(plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH.zip'),
@@ -55,6 +54,7 @@ function plusReady_zb() {
 						function () {
 							plus.nativeUI.toast('解压完成，正在载入装扮');
 							plusReady_zb()
+							plusReady_bj_img()
 						},
 						function (error) {
 							plus.nativeUI.toast('解压失败');
