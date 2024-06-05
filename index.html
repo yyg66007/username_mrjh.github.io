@@ -34,7 +34,7 @@
         justify-content: center;
         text-align: center;
         color: #fff;
-        border: 1px solid #fff;
+        border: 1.5px solid #fff;
         border-radius: 10px;
         font-size: 16px;
         overflow: hidden;
@@ -44,7 +44,7 @@
         width: 100%;
         height: 35px;
         line-height: 35px;
-        border-top: 1px solid #fff;
+        border-top: 1.5px solid #fff;
         border-bottom: 0;
         box-sizing: border-box;
         transition: all 0.3s;
@@ -71,7 +71,7 @@
         <img src="./192x192.png"
             style="display: block;width:128px;height: 125px;">
         <div
-            style="border-top: 1px solid #fff;border-bottom: 1px solid #fff;width: 60%;margin:20px 0 30px 20%;padding:10px 5px;">
+            style="border-top: 1.5px solid #fff;border-bottom: 1.5px solid #fff;width: 60%;margin:20px 0 30px 20%;padding:10px 5px;">
             <h3 style="text-align: center;color: #fff;font-size: 22px;">《每日计划》</h3>
             <h4 style="text-align: center;color: #fff;font-size: 16px;margin-top: 2px;">每日一打卡，自律不再难！</h4>
             <p style="width:100%;text-align:center;color:#fff;font-size:12px;margin-top: 7px;">
@@ -427,7 +427,6 @@
                         messageDom.remove()
                         messageDomb.remove()
                     }, 300)
-                    history.go(-1)
                 }
                 messageDomc.querySelectorAll('button')[0].addEventListener('click', () => {
                     sc()
@@ -444,11 +443,6 @@
                     messageDomc.querySelectorAll('button')[0].style.setProperty('width', "80%")
                     messageDomc.querySelectorAll('button')[0].style.setProperty('color', messageStatus[messageInfoTYPE].color)
                     messageDomc.querySelectorAll('button')[0].innerHTML = messageDomc.querySelectorAll('button')[1].innerHTML
-                }
-                history.pushState(null, null, "#" + Math.random()); //用户返回执行的代码
-                window.onhashchange = function (event) {
-                    //需要执行的代码
-                    sc()
                 }
             }, 10)
         }
