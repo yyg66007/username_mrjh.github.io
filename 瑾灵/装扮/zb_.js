@@ -23,19 +23,6 @@ function plusReady_zb() {
 				}).catch(function (err) { });
 			});
 	})
-	img.addEventListener('load', () => {
-		dibu_ys_i_q0 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3202.PNG')
-		dibu_ys_i_q1 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3198.PNG')
-		dibu_ys_i_q2 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3194.PNG')
-		dibu_ys_i_q3 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3198.PNG')
-		dibu_ys_i_q4 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3190.PNG')
-		dibu_ys_i_h0 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3200.PNG')
-		dibu_ys_i_h1 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3196.PNG')
-		dibu_ys_i_h2 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3192.PNG')
-		dibu_ys_i_h3 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3196.PNG')
-		dibu_ys_i_h4 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3188.PNG')
-	})
-
 	localforage.getItem('ZB_img', function (err, value) {
 		ZB_img = true
 		if (value != null) {
@@ -71,41 +58,53 @@ function plusReady_zb() {
 			}, 1000)
 		}
 	})
-	var fool_img = document.querySelector('.foot').querySelectorAll('img')
-	var fool_span = document.querySelector('.foot').querySelectorAll('span')
-	for (let i = 0; i < fool_img.length; i++) {
-		fool_img[i].style.width = '62px'
-		fool_img[i].style.height = '62px'
-		fool_img[i].style.marginTop = '-22px'
-		fool_img[i].style.marginLeft = '-15px'
-		fool_span[i].style.top = '3.5rem'
-	}
-	fool_img[0].src = dibu_ys_i_h0
-	fool_img[1].src = dibu_ys_i_q1
-	fool_img[2].src = dibu_ys_i_q2
-	fool_img[3].src = dibu_ys_i_q3
-	fool_img[4].src = dibu_ys_i_q4
+	img.addEventListener('load', () => {
+		dibu_ys_i_q0 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3202.PNG')
+		dibu_ys_i_q1 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3198.PNG')
+		dibu_ys_i_q2 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3194.PNG')
+		dibu_ys_i_q3 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3198.PNG')
+		dibu_ys_i_q4 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3190.PNG')
+		dibu_ys_i_h0 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3200.PNG')
+		dibu_ys_i_h1 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3196.PNG')
+		dibu_ys_i_h2 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3192.PNG')
+		dibu_ys_i_h3 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3196.PNG')
+		dibu_ys_i_h4 = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3188.PNG')
 
-	function zb_z(num, a, b) {
-		var fool_img = window.frames[num].document.querySelector('.foot').querySelectorAll('img')
-		var fool_span = window.frames[num].document.querySelector('.foot').querySelectorAll('span')
+		var fool_img = document.querySelector('.foot').querySelectorAll('img')
+		var fool_span = document.querySelector('.foot').querySelectorAll('span')
 		for (let i = 0; i < fool_img.length; i++) {
 			fool_img[i].style.width = '62px'
 			fool_img[i].style.height = '62px'
 			fool_img[i].style.marginTop = '-22px'
 			fool_img[i].style.marginLeft = '-15px'
-			fool_span[i].style.top = '3.5rem'
-			fool_span[i].style.marginTop=`.5rem`;
+			fool_span[i].style.marginTop = `.5rem`;
 		}
-		fool_img[0].src = dibu_ys_i_q0
+		fool_img[0].src = dibu_ys_i_h0
 		fool_img[1].src = dibu_ys_i_q1
 		fool_img[2].src = dibu_ys_i_q2
 		fool_img[3].src = dibu_ys_i_q3
 		fool_img[4].src = dibu_ys_i_q4
-		fool_img[a].src = b
-	}
-	zb_z('iframe1', 1, dibu_ys_i_h1)
-	zb_z('iframe2', 2, dibu_ys_i_h2)
-	zb_z('iframe3', 3, dibu_ys_i_h3)
-	zb_z('iframe4', 4, dibu_ys_i_h4)
+
+		function zb_z(num, a, b) {
+			var fool_img = window.frames[num].document.querySelector('.foot').querySelectorAll('img')
+			var fool_span = window.frames[num].document.querySelector('.foot').querySelectorAll('span')
+			for (let i = 0; i < fool_img.length; i++) {
+				fool_img[i].style.width = '62px'
+				fool_img[i].style.height = '62px'
+				fool_img[i].style.marginTop = '-22px'
+				fool_img[i].style.marginLeft = '-15px'
+				fool_span[i].style.marginTop = `.5rem`;
+			}
+			fool_img[0].src = dibu_ys_i_q0
+			fool_img[1].src = dibu_ys_i_q1
+			fool_img[2].src = dibu_ys_i_q2
+			fool_img[3].src = dibu_ys_i_q3
+			fool_img[4].src = dibu_ys_i_q4
+			fool_img[a].src = b
+		}
+		zb_z('iframe1', 1, dibu_ys_i_h1)
+		zb_z('iframe2', 2, dibu_ys_i_h2)
+		zb_z('iframe3', 3, dibu_ys_i_h3)
+		zb_z('iframe4', 4, dibu_ys_i_h4)
+	})
 }
