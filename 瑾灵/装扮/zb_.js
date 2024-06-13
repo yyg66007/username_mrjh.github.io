@@ -7,22 +7,6 @@ if (window.plus) {
 function plusReady_zb() {
 	let img = document.createElement('img'); // 更名为 img 而不是 iframe  
 	img.src = plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH/IMG_3202.PNG'); // 假设 bz 是一个已经定义的变量，包含了图像的 URL 
-	img.addEventListener('error', () => {
-		plus.nativeUI.toast('下载装扮成功，开始解压');
-		localforage.setItem('ZB_img', false).then(function (value) { }).catch(
-			function (err) { });
-		plus.zip.decompress(plus.io.convertLocalFileSystemURL('_doc/ZB/IMG/dibu_zb_ZsG6PH.zip'),
-			'_doc/ZB/IMG/',
-			function () {
-				plus.nativeUI.toast('解压完成，正在载入装扮');
-				plusReady_zb()
-			},
-			function (error) {
-				plus.nativeUI.toast('解压失败');
-				localforage.removeItem('ZB').then(function () {
-				}).catch(function (err) { });
-			});
-	})
 	localforage.getItem('ZB_img', function (err, value) {
 		ZB_img = true
 		if (value != null) {
@@ -77,7 +61,7 @@ function plusReady_zb() {
 			fool_img[i].style.height = '62px'
 			fool_img[i].style.marginTop = '-22px'
 			fool_img[i].style.marginLeft = '-15px'
-			fool_span[i].style.marginTop = `.5rem`;
+			fool_span[i].style.marginTop = `.6rem`;
 		}
 		fool_img[0].src = dibu_ys_i_h0
 		fool_img[1].src = dibu_ys_i_q1
@@ -93,7 +77,7 @@ function plusReady_zb() {
 				fool_img[i].style.height = '62px'
 				fool_img[i].style.marginTop = '-22px'
 				fool_img[i].style.marginLeft = '-15px'
-				fool_span[i].style.marginTop = `.5rem`;
+				fool_span[i].style.marginTop = `.6rem`;
 			}
 			fool_img[0].src = dibu_ys_i_q0
 			fool_img[1].src = dibu_ys_i_q1
